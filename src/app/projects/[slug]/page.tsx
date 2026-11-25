@@ -7,7 +7,6 @@ import { TextLink } from "@/components/ui/TextLink";
 
 type Params = { slug: string };
 
-export const dynamicParams = false; // unknown or hidden slugs are a 404, never rendered
 
 export function generateStaticParams(): Params[] {
   return getPublicProjects().map((p) => ({ slug: p.slug }));
