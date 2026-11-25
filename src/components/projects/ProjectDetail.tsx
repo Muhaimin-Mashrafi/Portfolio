@@ -75,6 +75,17 @@ export function ProjectDetail({ project }: { project: ResolvedProject }) {
           </dl>
         )}
       </Section>
+      {g && !g.isPrivate && g.readmeHtml && (
+        <Section label="Repository README">
+          <details className="max-w-2xl border-y border-line py-4">
+            <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.1em] text-muted hover:text-fg">
+              Show README from GitHub
+            </summary>
+            {/* HTML was produced by the build-time sanitiser (src/lib/sync/sanitize.ts): no scripts, raw HTML, images or unsafe links. */}
+            <div className="readme mt-5 space-y-4 text-sm leading-relaxed text-fg/90" dangerouslySetInnerHTML={{ __html: g.readmeHtml }} />
+          </details>
+        </Section>
+      )}
       {d.futureImprovements && d.futureImprovements.length > 0 && <Section label="Future improvements"><Bullets items={d.futureImprovements} /></Section>}
     </>
   );

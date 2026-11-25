@@ -1,17 +1,16 @@
-import { z } from "zod";
 import { curatedProjects } from "@/data/projects";
 import { portfolioConfig } from "@/data/portfolio.config";
 import generatedRaw from "@/data/generated/projects.json";
-import { githubMetaSchema, type Project, type ResolvedProject } from "@/types/project";
+import { generatedFileSchema, type Project, type ResolvedProject } from "@/types/project";
 
 /**
- * Phase 4 writes `src/data/generated/projects.json` (GitHub API output). Until then it is an empty array.
+ * Phase 4 writes `src/data/generated/projects.json` (GitHub API output). Until it has run, `repos` is empty.
  * Generated metadata only refreshes the `github` block of a curated project; it never overrides owner-written
  * name, description or details, and it never publishes a repository by itself.
  */
 const generated = (() => {
-  const parsed = z.array(githubMetaSchema).safeParse(generatedRaw);
-  return parsed.success ? parsed.data : []; // a bad generated file must never break the site
+  const parsed = generatedFileSchema.safeParse(generatedRaw);
+  return parsed.success ? parsed.data.repos : []; // a bad generated file must never break the site
 })();
 
 function resolve(): ResolvedProject[] {

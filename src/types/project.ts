@@ -36,8 +36,22 @@ export const githubMetaSchema = z.object({
   updatedAt: z.string().optional(),
   license: z.string().nullable().optional(),
   isPrivate: z.boolean().optional(),
-  readme: z.string().optional(),
+  /** Repository description from GitHub (plain text). Not used to replace owner-written descriptions. */
+  description: z.string().nullable().optional(),
+  /** Language breakdown by share of code, largest first. */
+  languages: z.array(z.object({ name: z.string(), percent: z.number().min(0).max(100) })).optional(),
+  /** README converted to sanitised HTML at sync time (scripts, raw HTML, images and unsafe links removed). */
+  readmeHtml: z.string().nullable().optional(),
 });
+
+/** Shape of `src/data/generated/projects.json`, written only by `pnpm sync:projects`. */
+export const generatedFileSchema = z.object({
+  generatedAt: z.string().nullable(),
+  user: z.string().nullable(),
+  topic: z.string().nullable(),
+  repos: z.array(githubMetaSchema),
+});
+export type GeneratedFile = z.infer<typeof generatedFileSchema>;
 
 /** Owner-authored detail sections. Every field is optional: a missing field means the section is not rendered. */
 export const projectDetailsSchema = z.object({
