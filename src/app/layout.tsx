@@ -4,6 +4,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { baseMetadata } from "@/lib/metadata";
 import { isCvAvailable } from "@/lib/cv";
+import { bootPrePaintScript } from "@/lib/boot";
+import { BootSequence } from "@/components/boot/BootSequence";
 import "./globals.css";
 
 const spaceGrotesk = localFont({
@@ -31,9 +33,12 @@ export const viewport: Viewport = { themeColor: "#0B0D0F", colorScheme: "dark" }
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const cvAvailable = isCvAvailable();
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootPrePaintScript }} />
+      </head>
       <body className="min-h-dvh flex flex-col">
-        <div className="load-curtain" aria-hidden="true" />
+        <BootSequence />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:bg-fg focus:px-4 focus:py-2 focus:text-bg"

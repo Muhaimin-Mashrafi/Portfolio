@@ -80,14 +80,9 @@
 }
 
 /* ---------- Animation system ---------- */
-@keyframes load-line {
-  from { transform: translateY(0); }
-  to { transform: translateY(100vh); }
-}
-@keyframes load-curtain {
-  0%, 55% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
-}
+:root { --boot-offset: 3s; }
+html[data-boot="skip"] { --boot-offset: 0s; }
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
@@ -100,51 +95,16 @@
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
 }
-@keyframes eye-rotate {
-  to { transform: rotate(360deg); }
-}
-@keyframes eye-rotate-rev {
-  to { transform: rotate(-360deg); }
-}
-@keyframes plate-scan {
-  0% { transform: translateY(-40px); opacity: 0; }
-  12% { opacity: 1; }
-  88% { opacity: 1; }
-  100% { transform: translateY(560px); opacity: 0; }
-}
-@keyframes pupil-breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(0.88); }
-}
-
-.load-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: var(--color-bg);
-  pointer-events: none;
-  animation: load-curtain 0.75s ease-out forwards;
-}
-.load-curtain::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--color-accent);
-  animation: load-line 0.55s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
 
 .fade-up {
   opacity: 0;
   animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
-  animation-delay: var(--d, 0s);
+  animation-delay: calc(var(--boot-offset, 0s) + var(--d, 0s));
 }
 .fade-in {
   opacity: 0;
   animation: fade-in 1.2s ease-out forwards;
-  animation-delay: var(--d, 0s);
+  animation-delay: calc(var(--boot-offset, 0s) + var(--d, 0s));
 }
 .caret {
   display: inline-block;
@@ -154,23 +114,165 @@
   vertical-align: -0.15em;
   background: var(--color-accent);
   animation: caret 1.1s steps(1) infinite;
-  animation-delay: 1.6s;
+  animation-delay: calc(var(--boot-offset, 0s) + 1.6s);
 }
-
-.eye-ring-a { transform-origin: 240px 262px; animation: eye-rotate 90s linear infinite; }
-.eye-ring-b { transform-origin: 240px 262px; animation: eye-rotate-rev 60s linear infinite; }
-.eye-pupil { transform-origin: 240px 262px; animation: pupil-breathe 6s ease-in-out infinite; }
-.plate-scan { animation: plate-scan 7s cubic-bezier(0.45, 0, 0.55, 1) infinite; animation-delay: 1.5s; }
 
 .reveal-hidden { opacity: 0; transform: translateY(16px); }
 .reveal-anim { transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
 
+/* ---------- Boot sequence (total 3.4s; keep in sync with BOOT_TOTAL_MS) ----------
+   Only opacity and transform are animated. The overlay is fixed, so it causes no layout shift. */
+@keyframes boot-out {
+  0% { opacity: 1; visibility: visible; }
+  99% { opacity: 0; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes boot-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
+}
+@keyframes boot-silhouette {
+  0% { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+@keyframes boot-power {
+  0% { opacity: 0.04; }
+  18% { opacity: 0.14; }
+  30% { opacity: 0.07; }
+  48% { opacity: 0.34; }
+  60% { opacity: 0.28; }
+  80% { opacity: 0.62; }
+  100% { opacity: 1; }
+}
+@keyframes boot-glow {
+  from { opacity: 0; }
+  to { opacity: 0.6; }
+}
+@keyframes boot-breathe {
+  from { opacity: 0.86; }
+  to { opacity: 1; }
+}
+@keyframes boot-activate {
+  0%, 100% { transform: scale(1); }
+  45% { transform: scale(1.06, 1.12); }
+}
+@keyframes boot-type {
+  from { clip-path: inset(0 100% 0 0); opacity: 1; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+@keyframes boot-sweep {
+  0% { transform: translateY(-2vh); opacity: 0; }
+  15%, 85% { opacity: 0.55; }
+  100% { transform: translateY(102vh); opacity: 0; }
+}
+@keyframes boot-trace {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #07080a;
+  animation: boot-out 0.6s ease-in 2.8s forwards;
+  overflow: hidden;
+}
+html[data-boot] .boot { display: none; }
+/* fine scanning lines, barely visible */
+.boot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, rgba(232, 232, 232, 0.035) 0 1px, transparent 1px 4px);
+  pointer-events: none;
+}
+.boot-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  animation: boot-drift 3.4s linear forwards;
+}
+.boot-art { width: min(94vw, 760px); height: auto; aspect-ratio: 800 / 480; }
+
+.boot-silhouette { animation: boot-silhouette 2.4s ease-out 0.4s both; opacity: 0.35; }
+.boot-trace { opacity: 0; animation: boot-trace 0.8s ease-out 1.3s forwards; }
+.boot-glow { opacity: 0; animation: boot-glow 1.7s ease-out 0.4s forwards; }
+.boot-eye-power { opacity: 0.04; animation: boot-power 1.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards; }
+.boot-eye-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: boot-breathe 0.9s ease-in-out 1s 2 alternate, boot-activate 0.6s ease-in-out 2.15s;
+}
+
+.boot-text {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(56px, 12vh, 120px);
+  transform: translateX(-50%);
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+.boot-line {
+  opacity: 0;
+  margin: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: boot-type var(--dur, 0.5s) steps(24, end) var(--at, 0s) forwards;
+}
+.boot-line-final { color: var(--color-fg); }
+.boot-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 0.7em;
+  vertical-align: 0.08em;
+  background: var(--color-accent);
+}
+.boot-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(193, 18, 31, 0.7) 30%, rgba(193, 18, 31, 0.7) 70%, transparent);
+  opacity: 0;
+  animation: boot-sweep 0.7s cubic-bezier(0.45, 0, 0.55, 1) 2.1s forwards;
+}
+.boot-skip {
+  position: absolute;
+  right: clamp(12px, 3vw, 32px);
+  bottom: clamp(12px, 3vw, 28px);
+  min-height: 44px;
+  padding: 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  background: transparent;
+  border: 1px solid var(--color-line);
+  cursor: pointer;
+}
+.boot-skip:hover { color: var(--color-fg); border-color: var(--color-muted); }
+.boot-skip:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+
+@media (max-width: 639px) {
+  .boot-skip span { display: none; }
+  .boot-text { font-size: 0.62rem; letter-spacing: 0.12em; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .boot { display: none; }
+  :root { --boot-offset: 0s; }
   .reveal-hidden { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
-  .load-curtain { display: none; }
   .fade-up, .fade-in { opacity: 1; animation: none; transform: none; }
   .caret { animation: none; }
-  .eye-ring-a, .eye-ring-b, .eye-pupil, .plate-scan { animation: none; }
-  .plate-scan { opacity: 0; }
 }
