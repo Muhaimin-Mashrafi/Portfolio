@@ -31,7 +31,7 @@ Optional fields that are empty are simply not rendered. Nothing is invented: add
 
 **Add or replace the CV** — put the PDF at `public/cv/Abdullah-Al-Muhaimin-CV.pdf` and push. The CV is detected at build time, and a push triggers a fresh Vercel build, so the "Download" and "Open" buttons appear after that deploy. (Locally, run `rm -rf .next` before `pnpm build` if you add the file after a previous build.)
 
-**Add an achievement** — add an object to `src/data/achievements.json` (see `src/types/achievement.ts` for fields: title, category, issuer, date, optional url). Push; Vercel rebuilds. Achievements are never inferred from commits or stars.
+**Add an achievement** — add an object to `src/data/achievements.json` (fields in `src/types/achievement.ts`: `title`, `category`, optional `description`, `date`, `verificationUrl`, `image`, `visibility`). Push; Vercel rebuilds. Achievements are never inferred from commits or stars.
 
 **Add a project** — create `src/data/projects/<slug>.json` (schema: `src/types/project.ts`), register it in `src/data/projects/index.ts`, add its slug to `featured` in `portfolio.config.ts` if it should be on the homepage. Put screenshots in `public/images/projects/` and list them under `details.screenshots` with alt text. Use `visibility: "hidden"` while a project is not ready. Keep private notes in `drafts/` (git-ignored).
 
