@@ -8,6 +8,8 @@
   --color-accent-deep: #75151c;
   --color-fg: #e8e8e8;
   --color-muted: #92979d;
+  /* Lighter crimson for small text: 5.5:1 on the background (the base accent is for lines, markers and buttons) */
+  --color-accent-text: #e0525b;
   --color-line: #292d32;
 
   --breakpoint-xs: 30rem;

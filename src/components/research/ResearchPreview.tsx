@@ -37,7 +37,7 @@ export function ResearchPreview() {
               <ul className="mt-4 divide-y divide-line border-y border-line">
                 {research.areas.map((area, i) => (
                   <li key={area} className="flex items-baseline gap-4 py-3.5">
-                    <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-mono text-xs text-accent-text">{String(i + 1).padStart(2, "0")}</span>
                     <span className="text-[0.9375rem] text-fg/90">{area}</span>
                   </li>
                 ))}

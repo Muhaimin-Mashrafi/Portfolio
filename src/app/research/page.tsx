@@ -17,7 +17,7 @@ const Numbered = ({ items }: { items: string[] }) => (
   <ol className="max-w-2xl divide-y divide-line border-y border-line">
     {items.map((it, i) => (
       <li key={it} className="flex items-baseline gap-4 py-3.5">
-        <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+        <span className="font-mono text-xs text-accent-text">{String(i + 1).padStart(2, "0")}</span>
         <span className="text-fg/90">{it}</span>
       </li>
     ))}

@@ -3,16 +3,17 @@ import { TagList } from "@/components/ui/Tag";
 import { TextLink } from "@/components/ui/TextLink";
 import { categoryLabels, statusLabels, type ResolvedProject } from "@/types/project";
 
-export function ProjectRow({ project, index }: { project: ResolvedProject; index: number }) {
+export function ProjectRow({ project, index, headingLevel = "h3" }: { project: ResolvedProject; index: number; headingLevel?: "h2" | "h3" }) {
   const meta = [categoryLabels[project.category], project.status && statusLabels[project.status]].filter(Boolean).join(" · ");
+  const Heading = headingLevel;
   return (
     <article className="grid gap-6 border-t border-line py-10 first:border-t-0 first:pt-0 md:grid-cols-[4rem_1fr] md:gap-10">
-      <p className="font-mono text-xs text-accent" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
+      <p className="font-mono text-xs text-accent-text" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
       <div>
         <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">{meta}</p>
-        <h3 className="mt-3 font-heading text-[clamp(1.5rem,3vw,2.25rem)] font-medium leading-tight tracking-[-0.02em]">
+        <Heading className="mt-3 font-heading text-[clamp(1.5rem,3vw,2.25rem)] font-medium leading-tight tracking-[-0.02em]">
           <Link href={`/projects/${project.slug}`} className="transition-colors hover:text-muted">{project.name}</Link>
-        </h3>
+        </Heading>
         <p className="mt-4 max-w-2xl leading-relaxed text-muted">{project.description}</p>
         {project.context && <p className="mt-3 font-mono text-xs uppercase tracking-[0.1em] text-muted">{project.context}</p>}
         <div className="mt-5"><TagList items={project.technologies} label={`${project.name} technologies`} /></div>

@@ -8,9 +8,9 @@ export function SkillGroups({ compact = false }: { compact?: boolean }) {
     <div className={compact ? "grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" : "grid gap-x-16 gap-y-12 md:grid-cols-2"}>
       {groups.map((g) => (
         <section key={g.id} aria-labelledby={`skill-${g.id}`}>
-          <h3 id={`skill-${g.id}`} className="border-b border-line pb-3 font-mono text-xs uppercase tracking-[0.18em] text-muted">
+          <h2 id={`skill-${g.id}`} className="border-b border-line pb-3 font-mono text-xs uppercase tracking-[0.18em] text-muted">
             {g.title}
-          </h3>
+          </h2>
           <ul className="mt-2 divide-y divide-line">
             {g.items.map((i) => (
               <li key={i.name} className="flex items-baseline justify-between gap-4 py-3">

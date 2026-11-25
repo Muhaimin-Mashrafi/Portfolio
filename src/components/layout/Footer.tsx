@@ -19,7 +19,7 @@ export function Footer({ cvAvailable }: { cvAvailable: boolean }) {
               {cvAvailable ? (
                 <a className={link} href={profile.cv.publicPath} download={profile.cv.fileName}>CV</a>
               ) : (
-                <span className="inline-flex min-h-11 items-center text-muted/60" title="CV coming soon">CV · soon</span>
+                <span className="inline-flex min-h-11 items-center text-muted" title="CV coming soon">CV · soon</span>
               )}
             </li>
           </ul>

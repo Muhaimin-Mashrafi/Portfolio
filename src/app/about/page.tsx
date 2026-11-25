@@ -40,7 +40,7 @@ export default function AboutPage() {
         <ol className="grid gap-px border border-line bg-line md:grid-cols-3">
           {profile.philosophy.map((p, i) => (
             <li key={p.title} className="bg-bg p-6">
-              <p className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</p>
+              <p className="font-mono text-xs text-accent-text">{String(i + 1).padStart(2, "0")}</p>
               <p className="mt-4 font-heading text-xl font-medium">{p.title}</p>
               <p className="mt-3 text-sm leading-relaxed text-muted">{p.text}</p>
             </li>

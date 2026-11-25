@@ -3,7 +3,17 @@
   "name": "CropVerse",
   "description": "A crop marketplace web app connecting farmers and buyers, with email-verified signup, admin account approval, crop listings, price-trend charts and crop disease reports.",
   "category": "web-app",
-  "technologies": ["HTML", "CSS", "JavaScript", "Node.js", "Express", "MySQL", "JWT", "bcryptjs", "Nodemailer"],
+  "technologies": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Node.js",
+    "Express",
+    "MySQL",
+    "JWT",
+    "bcryptjs",
+    "Nodemailer"
+  ],
   "context": "Built as a DBMS Lab project.",
   "visibility": "public",
   "reviewStatus": "verified",
@@ -28,6 +38,18 @@
     "implementation": [
       "Passwords are hashed with bcryptjs and sessions use JSON Web Tokens issued at login.",
       "API routes are protected by a role-checking middleware, so farmer, buyer and admin endpoints are separated."
+    ],
+    "screenshots": [
+      {
+        "src": "/images/projects/cropverse-home.webp",
+        "alt": "CropVerse home page: title, tagline, Create Account and Login buttons, and three feature cards for fair pricing, disease alerts and a direct marketplace.",
+        "caption": "Home page (static frontend)"
+      },
+      {
+        "src": "/images/projects/cropverse-login.webp",
+        "alt": "CropVerse login form with email, password and role selection for farmer, buyer or admin.",
+        "caption": "Role-based login (static frontend)"
+      }
     ]
   }
 }

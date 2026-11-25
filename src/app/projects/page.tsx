@@ -18,7 +18,7 @@ export default function ProjectsPage() {
       <PageHeader label="Projects" title="Things I've built." lead="A curated selection. Each project is described from its repository and documentation." />
       <section aria-label="Project list" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 md:py-20">
         {projects.length > 0 ? (
-          projects.map((p, i) => <ProjectRow key={p.slug} project={p} index={i} />)
+          projects.map((p, i) => <ProjectRow key={p.slug} project={p} index={i} headingLevel="h2" />)
         ) : (
           <p className="text-muted">No projects are published yet.</p>
         )}
