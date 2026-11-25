@@ -1,0 +1,33 @@
+{
+  "slug": "cropverse",
+  "name": "CropVerse",
+  "description": "A crop marketplace web app connecting farmers and buyers, with email-verified signup, admin account approval, crop listings, price-trend charts and crop disease reports.",
+  "category": "web-app",
+  "technologies": ["HTML", "CSS", "JavaScript", "Node.js", "Express", "MySQL", "JWT", "bcryptjs", "Nodemailer"],
+  "context": "Built as a DBMS Lab project.",
+  "visibility": "public",
+  "reviewStatus": "verified",
+  "github": {
+    "repo": "Muhaimin-Mashrafi/Corpverse",
+    "url": "https://github.com/Muhaimin-Mashrafi/Corpverse",
+    "isPrivate": false
+  },
+  "details": {
+    "overview": "CropVerse is a three-role web application. Farmers publish crop listings, buyers browse and purchase them, and an administrator approves new accounts before they can sign in.",
+    "features": [
+      "Signup with an emailed verification code, followed by administrator approval before login",
+      "Farmers can create, edit and delete crop listings, view a dashboard summary and alerts, and submit crop disease reports",
+      "Buyers can browse the marketplace, purchase crops, view a dashboard and see individual farmers' listings",
+      "Price-trend chart pages for both farmers and buyers",
+      "Admin dashboard to review pending signups, approve users and view all users"
+    ],
+    "architecture": [
+      "A static HTML, CSS and vanilla JavaScript frontend, organised by role (admin, buyer, farmer), calls a Node.js and Express REST API.",
+      "The API (server/app.js) uses a MySQL connection pool (db.js) and sends verification emails through Nodemailer (mailer.js). The database schema defines eight tables: users, email_otps, crops, crop_listings, transactions, price_trends, disease_reports and alerts."
+    ],
+    "implementation": [
+      "Passwords are hashed with bcryptjs and sessions use JSON Web Tokens issued at login.",
+      "API routes are protected by a role-checking middleware, so farmer, buyer and admin endpoints are separated."
+    ]
+  }
+}

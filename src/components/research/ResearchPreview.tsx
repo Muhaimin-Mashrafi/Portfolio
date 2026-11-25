@@ -1,5 +1,6 @@
 import { research } from "@/data/research";
 import { Reveal } from "@/components/ui/Reveal";
+import { TextLink } from "@/components/ui/TextLink";
 
 export function ResearchPreview() {
   return (
@@ -25,9 +26,10 @@ export function ResearchPreview() {
                 {research.title}
               </h2>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">{research.context}</p>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">{research.overview}</p>
 
               <p className="mt-8 font-mono text-xs uppercase tracking-[0.12em] text-muted">{research.institution}</p>
+              <div className="mt-4"><TextLink href="/research">Research details</TextLink></div>
             </div>
 
             <div>

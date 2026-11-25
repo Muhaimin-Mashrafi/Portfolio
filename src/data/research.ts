@@ -1,25 +1,14 @@
+import { researchSchema } from "@/types/research";
+
 /**
  * Current research. Only verified information belongs here.
- * Optional fields (null) are not rendered until you supply them — add them when ready:
- * abstract, objectives, team, supervisor, contribution, methodology, setup, findings, paper, publications.
+ * Everything left as `null` / `[]` is hidden on the site. Fill a field in and it appears automatically.
  */
-export type Research = {
-  title: string;
-  status: string;
-  institution: string;
-  context: string;
-  areas: readonly string[];
-  // Not published until supplied by the owner:
-  contribution: string | null;
-  abstract: string | null;
-  paperUrl: string | null;
-};
-
-export const research: Research = {
+export const research = researchSchema.parse({
   title: "Data Poisoning in External Knowledge Bases of Large Language Models Through Cross-Lingual Queries",
   status: "Ongoing · Collaborative Research",
   institution: "United International University (UIU)",
-  context:
+  overview:
     "I am part of a research team investigating data poisoning vulnerabilities in external knowledge bases used by Large Language Models, with particular attention to cross-lingual query-based attacks.",
   areas: [
     "Large Language Models",
@@ -29,7 +18,14 @@ export const research: Research = {
     "Cross-Lingual Query Processing",
     "AI Security and Robustness",
   ],
-  contribution: null,
   abstract: null,
-  paperUrl: null,
-};
+  objectives: [],
+  team: [],
+  supervisor: null,
+  contribution: null,
+  methodology: [],
+  experimentalSetup: [],
+  findings: [],
+  paper: null,
+  publicationUrl: null,
+});

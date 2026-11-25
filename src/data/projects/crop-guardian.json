@@ -1,0 +1,15 @@
+{
+  "slug": "crop-guardian",
+  "name": "Crop Guardian",
+  "description": "An AI-assisted crop disease assistant for farmers in Bangladesh, combining Gemini vision, an EfficientNet-B0 classifier and a retrieval-based knowledge base.",
+  "category": "ai-ml",
+  "technologies": ["Python", "FastAPI", "PyTorch", "React", "TypeScript"],
+  "visibility": "hidden",
+  "reviewStatus": "needs-review",
+  "reviewNote": "AUTHORSHIP NOT ESTABLISHED. The repository is a fork of Hasibur-sun/crop-guardian; every commit in the history is by Hasibur, the README credits Hasibur as the builder, and its accuracy figures (e.g. 99.53% test accuracy) are his reported results. Do not publish as your own work. If you contributed, tell me exactly what, and I will present it as a collaboration with attribution.",
+  "github": {
+    "repo": "Muhaimin-Mashrafi/crop-guardian",
+    "url": "https://github.com/Muhaimin-Mashrafi/crop-guardian",
+    "isPrivate": false
+  }
+}

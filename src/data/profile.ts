@@ -34,6 +34,39 @@ export const profile = {
     "I believe in learning by building, questioning existing systems, and continuously pushing my technical capabilities further.",
   ],
 
+  technicalBackground: [
+    "Advanced Python programming",
+    "Training machine learning models",
+    "Evaluating machine learning models",
+    "Independent, practical project development",
+    "Git and GitHub",
+    "Visual Studio Code",
+  ],
+
+  interests: [
+    "Artificial Intelligence",
+    "Machine Learning",
+    "Deep Learning",
+    "Generative AI",
+    "Large Language Models",
+    "Natural Language Processing",
+    "Computer Vision",
+    "AI Security",
+  ],
+
+  /** Taken from the closing line of the introduction. */
+  philosophy: [
+    { title: "Learn by building", text: "Ideas become understanding once they run as working software." },
+    { title: "Question existing systems", text: "Understanding how AI systems can fail is part of building them well." },
+    { title: "Keep pushing capabilities", text: "Continuously extending what I can build and evaluate." },
+  ],
+
+  /** Drawn from the introduction only. Add your own statements here when you have them. */
+  goals: [
+    "Build intelligent systems that turn technical ideas into practical solutions.",
+    "Keep exploring emerging technologies across AI and machine learning.",
+  ],
+
   pillars: [
     { key: "Build", text: "I develop practical software and AI/ML projects." },
     { key: "Research", text: "I participate in collaborative research on emerging AI security problems." },
