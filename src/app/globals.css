@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens ---------- */
+@theme {
+  --color-bg: #0b0d0f;
+  --color-surface: #121518;
+  --color-accent: #c1121f;
+  --color-accent-deep: #75151c;
+  --color-fg: #e8e8e8;
+  --color-muted: #92979d;
+  --color-line: #292d32;
+
+  --breakpoint-xs: 30rem;
+}
+
+@theme inline {
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-accent-deep);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 3px;
+  }
+  /* anchors land below the sticky header */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* ---------- Surface details ---------- */
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(41 45 50 / 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(41 45 50 / 0.45) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 20%, transparent 75%);
+}
+
+/* Decorative hero background image: faded on the left and bottom edges, never interactive. */
+.hero-bg {
+  right: 0;
+  width: 60%;
+  opacity: var(--bg-op-desktop);
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 45%),
+    linear-gradient(to bottom, #000 55%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 45%),
+    linear-gradient(to bottom, #000 55%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+@media (max-width: 1023px) {
+  .hero-bg { width: 75%; opacity: var(--bg-op-tablet); }
+}
+@media (max-width: 767px) {
+  .hero-bg { width: 110%; right: -25%; opacity: var(--bg-op-mobile); }
+}
+
+/* ---------- Animation system ---------- */
+@keyframes load-line {
+  from { transform: translateY(0); }
+  to { transform: translateY(100vh); }
+}
+@keyframes load-curtain {
+  0%, 55% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes eye-rotate {
+  to { transform: rotate(360deg); }
+}
+@keyframes eye-rotate-rev {
+  to { transform: rotate(-360deg); }
+}
+@keyframes plate-scan {
+  0% { transform: translateY(-40px); opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { transform: translateY(560px); opacity: 0; }
+}
+@keyframes pupil-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.88); }
+}
+
+.load-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  pointer-events: none;
+  animation: load-curtain 0.75s ease-out forwards;
+}
+.load-curtain::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-accent);
+  animation: load-line 0.55s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+.fade-in {
+  opacity: 0;
+  animation: fade-in 1.2s ease-out forwards;
+  animation-delay: var(--d, 0s);
+}
+.caret {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  margin-left: 0.25ch;
+  vertical-align: -0.15em;
+  background: var(--color-accent);
+  animation: caret 1.1s steps(1) infinite;
+  animation-delay: 1.6s;
+}
+
+.eye-ring-a { transform-origin: 240px 262px; animation: eye-rotate 90s linear infinite; }
+.eye-ring-b { transform-origin: 240px 262px; animation: eye-rotate-rev 60s linear infinite; }
+.eye-pupil { transform-origin: 240px 262px; animation: pupil-breathe 6s ease-in-out infinite; }
+.plate-scan { animation: plate-scan 7s cubic-bezier(0.45, 0, 0.55, 1) infinite; animation-delay: 1.5s; }
+
+.reveal-hidden { opacity: 0; transform: translateY(16px); }
+.reveal-anim { transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hidden { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+  .load-curtain { display: none; }
+  .fade-up, .fade-in { opacity: 1; animation: none; transform: none; }
+  .caret { animation: none; }
+  .eye-ring-a, .eye-ring-b, .eye-pupil, .plate-scan { animation: none; }
+  .plate-scan { opacity: 0; }
+}
