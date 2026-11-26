@@ -73,7 +73,7 @@ Pushes to `main` deploy through Vercel's Git integration, so edits to achievemen
 
 ## Privacy and ownership rules applied
 
-- Private repositories are never linked or described publicly. `AfterFall` stays out of the catalogue.
+- Private repositories are never linked or described publicly and stay out of the catalogue.
 - Forks are not claimed as personal work (`crop-guardian` is a fork of another author's repository and is excluded until verified personal contributions and attribution are added).
 - Repository access is not treated as authorship.
 

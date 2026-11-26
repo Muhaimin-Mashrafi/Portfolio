@@ -42,7 +42,7 @@ test("sync produces schema-valid data with language percentages", async () => {
 
 test("private, fork, empty, profile and excluded repos are never synced", async () => {
   const repos = [
-    repo({ name: "AfterFall", full_name: "Muhaimin-Mashrafi/AfterFall", private: true }),
+    repo({ name: "PrivateRepo", full_name: "Muhaimin-Mashrafi/PrivateRepo", private: true }),
     repo({ name: "crop-guardian", full_name: "Muhaimin-Mashrafi/crop-guardian", fork: true }),
     repo({ name: "Python-Programing", full_name: "Muhaimin-Mashrafi/Python-Programing", size: 0 }),
     repo({ name: "Muhaimin-Mashrafi", full_name: "Muhaimin-Mashrafi/Muhaimin-Mashrafi" }),

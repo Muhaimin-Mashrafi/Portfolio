@@ -13,7 +13,7 @@ test("curated projects validate and none are private repositories", () => {
 
 test("only verified public projects are curated; restricted repositories are not in the public catalogue", () => {
   const repos = curatedProjects.map((p) => p.github?.repo.toLowerCase());
-  for (const banned of ["afterfall", "crop-guardian", "python-programing"]) {
+  for (const banned of ["crop-guardian", "python-programing"]) {
     assert.ok(!repos.some((r) => r?.endsWith(`/${banned}`)), banned);
   }
   assert.ok(curatedProjects.every((p) => p.visibility !== "public" || p.reviewStatus === "verified"));
