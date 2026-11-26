@@ -99,6 +99,22 @@ export function Hero({ cvAvailable }: { cvAvailable: boolean }) {
               </a>
             </li>
           </ul>
+
+          {/* Phones / small tablets: the same portrait, shown under the links (the right-hand one is hidden below lg). */}
+          <figure className="fade-up mt-10 w-[200px] sm:w-[240px] lg:hidden" style={{ "--d": "1.35s" } as React.CSSProperties}>
+            <div className="relative border border-line bg-surface p-1.5">
+              <Image
+                src={asset("/images/profile.webp")}
+                alt="Portrait of Abdullah Al Muhaimin"
+                width={800}
+                height={1000}
+                sizes="240px"
+                className="h-auto w-full grayscale-[0.2] contrast-[1.05]"
+              />
+              <span className="absolute -left-px -top-px h-5 w-5 border-l-2 border-t-2 border-accent" aria-hidden="true" />
+              <span className="absolute -bottom-px -right-px h-5 w-5 border-b-2 border-r-2 border-accent" aria-hidden="true" />
+            </div>
+          </figure>
         </div>
 
       </div>
