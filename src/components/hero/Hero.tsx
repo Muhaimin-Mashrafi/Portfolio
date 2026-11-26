@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { asset } from "@/lib/base-path";
 import { profile } from "@/data/profile";
 import { Button, DisabledButton } from "@/components/ui/Button";
@@ -13,7 +14,26 @@ export function Hero({ cvAvailable }: { cvAvailable: boolean }) {
       <div className="grid-lines absolute inset-0 -z-10" aria-hidden="true" />
       <HeroBackground />
 
-      <div className="mx-auto flex max-w-7xl flex-col justify-center px-5 pb-16 pt-14 sm:px-8 md:pt-20 lg:min-h-[640px] lg:pb-24 lg:pt-24">
+      <div className="relative mx-auto flex max-w-7xl flex-col justify-center px-5 pb-16 pt-14 sm:px-8 md:pt-20 lg:min-h-[640px] lg:pb-24 lg:pt-24">
+        <figure
+          className="fade-in absolute right-8 top-1/2 hidden w-[300px] -translate-y-1/2 lg:block xl:w-[380px]"
+          style={{ "--d": "0.7s" } as React.CSSProperties}
+        >
+          <div className="relative border border-line bg-surface p-2">
+            <Image
+              src={asset("/images/profile.webp")}
+              alt="Portrait of Abdullah Al Muhaimin"
+              width={800}
+              height={1000}
+              priority
+              sizes="(min-width: 1280px) 380px, 300px"
+              className="h-auto w-full grayscale-[0.2] contrast-[1.05]"
+            />
+            <span className="absolute -left-px -top-px h-6 w-6 border-l-2 border-t-2 border-accent" aria-hidden="true" />
+            <span className="absolute -bottom-px -right-px h-6 w-6 border-b-2 border-r-2 border-accent" aria-hidden="true" />
+          </div>
+        </figure>
+
         <div>
           <h1
             id="hero-title"

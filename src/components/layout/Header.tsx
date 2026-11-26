@@ -49,7 +49,6 @@ export function Header() {
           <span className="grid size-7 place-items-center border border-line transition-colors group-hover:border-muted" aria-hidden="true">
             <span className="size-2 bg-accent" />
           </span>
-          <span className="font-heading text-[0.95rem] font-medium tracking-tight">{profile.name}</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">
