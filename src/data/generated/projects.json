@@ -1,1 +1,35 @@
-{ "generatedAt": null, "user": null, "topic": null, "repos": [] }
+{
+  "generatedAt": "2026-11-26T13:42:19.891Z",
+  "user": "Muhaimin-Mashrafi",
+  "topic": "portfolio",
+  "repos": [
+    {
+      "repo": "Muhaimin-Mashrafi/Corpverse",
+      "url": "https://github.com/Muhaimin-Mashrafi/Corpverse",
+      "homepage": null,
+      "language": "JavaScript",
+      "topics": [],
+      "stars": 0,
+      "forks": 0,
+      "updatedAt": "2026-11-22T08:39:11Z",
+      "license": null,
+      "isPrivate": false,
+      "description": "Crop marketplace web app for farmers, buyers and admins (Node.js, Express, MySQL)",
+      "languages": [
+        {
+          "name": "JavaScript",
+          "percent": 62.7
+        },
+        {
+          "name": "HTML",
+          "percent": 28.3
+        },
+        {
+          "name": "CSS",
+          "percent": 9
+        }
+      ],
+      "readmeHtml": "CropVerse\n<p>A crop marketplace web app that connects <strong>farmers</strong> and <strong>buyers</strong>, with an <strong>admin</strong> who approves new accounts. Built as a DBMS Lab project.</p>\n<h2>Features</h2>\n<ul>\n<li><strong>Signup with approval:</strong> new users verify with an emailed code, and an admin approves them before they can log in</li>\n<li><strong>Farmers:</strong> create, edit and delete crop listings, view a dashboard summary, see alerts, and submit crop disease reports</li>\n<li><strong>Buyers:</strong> browse the marketplace, purchase crops, view their dashboard, and view farmers' listings</li>\n<li><strong>Price trends:</strong> price chart pages for both farmers and buyers</li>\n<li><strong>Admin:</strong> review pending signups, approve users, and view all users</li>\n</ul>\n<h2>Tech stack</h2>\n<table>\n<thead>\n<tr>\n<th>Part</th>\n<th>Technology</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Frontend</td>\n<td>HTML, CSS, vanilla JavaScript</td>\n</tr>\n<tr>\n<td>Backend</td>\n<td>Node.js, Express</td>\n</tr>\n<tr>\n<td>Database</td>\n<td>MySQL (<code>mysql2</code>)</td>\n</tr>\n<tr>\n<td>Auth</td>\n<td>JWT, bcryptjs</td>\n</tr>\n<tr>\n<td>Email</td>\n<td>Nodemailer (SMTP)</td>\n</tr>\n</tbody>\n</table>\n<h2>Project structure</h2>\n<pre><code>cropverse/\n├── client/            # Frontend pages\n│   ├── admin/         # Admin dashboard\n│   ├── buyer/         # Buyer dashboard, marketplace, price chart\n│   ├── farmer/        # Farmer dashboard, listings, disease report, price chart\n│   ├── css/           # Styles\n│   ├── js/            # Page scripts and API helper\n│   └── *.html         # Landing, login, signup, verify pages\n├── server/            # Backend API\n│   ├── app.js         # Express routes\n│   ├── db.js          # MySQL connection pool\n│   ├── mailer.js      # Email sending\n│   ├── schema.sql     # Database schema\n│   └── .env.example   # Example environment settings\n└── package.json\n</code></pre>\n<h2>Getting started</h2>\n<p><strong>You need:</strong> Node.js and MySQL installed.</p>\n<ol>\n<li><strong>Install dependencies</strong>\n<pre><code class=\"language-bash\">npm run install:server\n</code></pre>\n</li>\n<li><strong>Create the database.</strong> Run the schema in MySQL:\n<pre><code class=\"language-bash\">mysql -u root -p &#x3C; server/schema.sql\n</code></pre>\n</li>\n<li><strong>Set up your environment file.</strong> A <code>server/.env</code> with dummy placeholder values is included so the project runs out of the box. Change <code>DB_PASS</code> to match your own MySQL password, and use your own SMTP details if you want signup emails to send. For any real deployment, use a long random <code>JWT_SECRET</code> and never commit real secrets (<code>server/.env.example</code> shows the format).</li>\n<li><strong>Start the API</strong>\n<pre><code class=\"language-bash\">npm start\n</code></pre>\nThe API runs at <code>http://localhost:4000</code>. Check <code>http://localhost:4000/api/health</code>.</li>\n<li><strong>Open the frontend.</strong> Serve the <code>client/</code> folder with any static server (for example the VS Code \"Live Server\" extension) and open <code>index.html</code>.</li>\n</ol>\n<p>If your API runs on a different address, set it in the browser console with <code>localStorage.setItem(\"API_BASE\", \"http://your-address:port\")</code>.</p>\n<h2>API overview</h2>\n<table>\n<thead>\n<tr>\n<th>Area</th>\n<th>Endpoints</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Auth</td>\n<td><code>POST /api/auth/signup</code>, <code>/api/auth/verify</code>, <code>/api/auth/login</code></td>\n</tr>\n<tr>\n<td>Public</td>\n<td><code>GET /api/health</code>, <code>/api/crops</code>, <code>/api/listings</code>, <code>/api/price-trends</code></td>\n</tr>\n<tr>\n<td>Farmer</td>\n<td><code>/api/farmer/listings</code>, <code>/api/farmer/my-listings</code>, <code>/api/farmer/disease-report</code>, <code>/api/farmer/alerts</code>, <code>/api/farmer/summary</code></td>\n</tr>\n<tr>\n<td>Buyer</td>\n<td><code>/api/buyer/purchase</code>, <code>/api/buyer/dashboard</code>, <code>/api/farmers/:id/listings</code></td>\n</tr>\n<tr>\n<td>Admin</td>\n<td><code>/api/admin/pending</code>, <code>/api/admin/users</code>, <code>/api/admin/approve</code></td>\n</tr>\n</tbody>\n</table>\n<h2>Author</h2>\n<p>Abdullah Al Muhaimin · <a rel=\"noopener noreferrer nofollow\" target=\"_blank\" href=\"https://github.com/Muhaimin-Mashrafi\">GitHub</a> · <a rel=\"noopener noreferrer nofollow\" target=\"_blank\" href=\"https://www.linkedin.com/in/abdullah-al-muhaimin-a3ba37292/\">LinkedIn</a></p>"
+    }
+  ]
+}
