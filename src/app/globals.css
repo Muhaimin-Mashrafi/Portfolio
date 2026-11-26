@@ -148,15 +148,19 @@ html[data-boot="skip"] { --boot-offset: 0s; }
 }
 @keyframes boot-glow {
   from { opacity: 0; }
-  to { opacity: 0.6; }
+  to { opacity: 0.8; }
 }
 @keyframes boot-breathe {
   from { opacity: 0.86; }
   to { opacity: 1; }
 }
 @keyframes boot-activate {
-  0%, 100% { transform: scale(1); }
-  45% { transform: scale(1.06, 1.12); }
+  0% { transform: scale(1); opacity: 1; }
+  12% { opacity: 0.35; }
+  22% { opacity: 1; }
+  34% { opacity: 0.55; }
+  46% { opacity: 1; }
+  100% { transform: scale(1.04, 0.78); opacity: 1; }
 }
 @keyframes boot-type {
   from { clip-path: inset(0 100% 0 0); opacity: 1; }
@@ -205,7 +209,7 @@ html[data-boot] .boot { display: none; }
 .boot-eye-pulse {
   transform-box: fill-box;
   transform-origin: center;
-  animation: boot-breathe 0.9s ease-in-out 1s 2 alternate, boot-activate 0.6s ease-in-out 2.15s;
+  animation: boot-breathe 0.9s ease-in-out 1s 2 alternate, boot-activate 0.7s ease-out 2.1s forwards;
 }
 
 .boot-text {
