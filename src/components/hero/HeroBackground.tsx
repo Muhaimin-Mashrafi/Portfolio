@@ -1,3 +1,4 @@
+import { asset } from "@/lib/base-path";
 import Image from "next/image";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -25,7 +26,7 @@ export function HeroBackground() {
       }
     >
       <Image
-        src={heroBackground.src}
+        src={asset(heroBackground.src)}
         alt=""
         fill
         sizes="(min-width: 1024px) 60vw, 100vw"

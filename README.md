@@ -1,6 +1,6 @@
 # Abdullah Al Muhaimin — Portfolio
 
-Next.js 16 (App Router, static generation), React 19, TypeScript, Tailwind CSS 4, Zod. Hosted on Vercel.
+Next.js 16 (App Router, static generation), React 19, TypeScript, Tailwind CSS 4, Zod. Hosted free on GitHub Pages (Vercel also works).
 
 ```bash
 pnpm install
@@ -54,22 +54,24 @@ Safety rules built in (and covered by `tests/sync.test.ts`):
 
 ### Workflows
 
-- `.github/workflows/sync-projects.yml` — every 6 hours and on manual **Run workflow**. Commits `projects.json` only if it changed, then calls a deploy hook.
+- `.github/workflows/sync-projects.yml` — every 6 hours and on manual **Run workflow**. Commits `projects.json` only if it changed, then starts the deploy workflow.
 - `.github/workflows/ci.yml` — typecheck, lint, tests and build on pushes to `main` and on pull requests.
 
-Commits made with the default `GITHUB_TOKEN` do not start other workflows, so the sync workflow requests a rebuild explicitly through a **deploy hook**. Without the hook the data is committed but the site is not rebuilt until the next push.
+Commits made with the default `GITHUB_TOKEN` do not start other workflows, so the sync workflow starts the deploy workflow explicitly (`gh workflow run`).
 
-## Deployment (Vercel)
+## Deployment
 
-1. Push this repository to GitHub (a new repository dedicated to the portfolio).
-2. In Vercel: **Add New → Project → Import** the repository. Framework preset: Next.js (auto). Build command and output are the defaults.
-3. Environment variables (Project → Settings → Environment Variables):
-   - `NEXT_PUBLIC_SITE_URL` — the final public URL, e.g. `https://your-domain.com` (used for canonical links, sitemap and Open Graph). Optional on `*.vercel.app`; the production URL is picked up automatically.
-4. Rebuild hook: Project → Settings → Git → **Deploy Hooks** → create one for the `main` branch, copy the URL.
-5. In GitHub: Settings → Secrets and variables → Actions → New repository secret → `DEPLOY_HOOK_URL` = that URL.
-6. Run **Actions → Sync GitHub projects → Run workflow** once to confirm it succeeds.
+### GitHub Pages (current)
 
-Pushes to `main` deploy through Vercel's Git integration, so edits to achievements, the CV or any data file go live automatically.
+1. Repository → **Settings → Pages → Build and deployment → Source: GitHub Actions** (one-time).
+2. Every push to `main` runs `.github/workflows/deploy-pages.yml` (typecheck, lint, tests, static build, publish). The site is at `https://<owner>.github.io/<repo>/`.
+3. The workflow sets `BASE_PATH` and `NEXT_PUBLIC_SITE_URL` itself. A repository named `<owner>.github.io` is served from the root instead of a sub-path.
+4. Static-export mode is `STATIC_EXPORT=1 BASE_PATH=/<repo> pnpm build` (output in `out/`). GitHub Pages cannot send custom HTTP headers, so the security/cache headers in `next.config.ts` apply only to the normal (Vercel) build.
+5. Custom domain: Settings → Pages → Custom domain, then remove `BASE_PATH` handling by setting the workflow's `BASE_PATH` to empty and `NEXT_PUBLIC_SITE_URL` to the domain.
+
+### Vercel (alternative)
+
+Import the repository in Vercel, leave the defaults, and optionally set `NEXT_PUBLIC_SITE_URL`. Do not set `STATIC_EXPORT` there.
 
 ## Privacy and ownership rules applied
 

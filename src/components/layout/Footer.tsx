@@ -1,3 +1,4 @@
+import { asset } from "@/lib/base-path";
 import { profile } from "@/data/profile";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -17,7 +18,7 @@ export function Footer({ cvAvailable }: { cvAvailable: boolean }) {
             {profile.email && <li><a className={link} href={`mailto:${profile.email}`}>Email</a></li>}
             <li>
               {cvAvailable ? (
-                <a className={link} href={profile.cv.publicPath} download={profile.cv.fileName}>CV</a>
+                <a className={link} href={asset(profile.cv.publicPath)} download={profile.cv.fileName}>CV</a>
               ) : (
                 <span className="inline-flex min-h-11 items-center text-muted" title="CV coming soon">CV · soon</span>
               )}

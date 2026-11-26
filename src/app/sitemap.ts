@@ -3,6 +3,8 @@ import { getSiteUrl } from "@/lib/metadata";
 import { getPublicProjects } from "@/lib/projects";
 import { getAchievements } from "@/lib/achievements";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
   const paths = ["", "/projects", "/research", "/skills", "/about", "/contact"];

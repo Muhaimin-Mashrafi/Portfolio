@@ -1,3 +1,4 @@
+import { asset } from "@/lib/base-path";
 import { profile } from "@/data/profile";
 import { Button, DisabledButton } from "@/components/ui/Button";
 import { ArrowIcon, DownloadIcon, ExternalIcon, GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
@@ -49,7 +50,7 @@ export function Hero({ cvAvailable }: { cvAvailable: boolean }) {
                   <DownloadIcon className="size-4" /> Download CV
                 </Button>
                 <a
-                  href={profile.cv.publicPath}
+                  href={asset(profile.cv.publicPath)}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open CV in a new tab"

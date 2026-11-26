@@ -1,3 +1,4 @@
+import { asset } from "@/lib/base-path";
 import Image from "next/image";
 import { achievementCategoryLabels, achievementCategory, type Achievement } from "@/types/achievement";
 import { TextLink } from "@/components/ui/TextLink";
@@ -21,7 +22,7 @@ export function AchievementList({ items }: { items: Achievement[] }) {
                 <div>
                   <p className="font-heading text-xl font-medium">{a.title}</p>
                   {a.description && <p className="mt-2 max-w-2xl leading-relaxed text-muted">{a.description}</p>}
-                  {a.image && <Image src={a.image.src} alt={a.image.alt} width={640} height={440} className="mt-4 h-auto max-w-sm border border-line" loading="lazy" />}
+                  {a.image && <Image src={asset(a.image.src)} alt={a.image.alt} width={640} height={440} className="mt-4 h-auto max-w-sm border border-line" loading="lazy" />}
                   {a.verificationUrl && <div className="mt-2"><TextLink href={a.verificationUrl} external>Verify</TextLink></div>}
                 </div>
               </li>

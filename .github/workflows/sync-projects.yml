@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # only to commit src/data/generated/projects.json
+  contents: write # commit src/data/generated/projects.json
+  actions: write # start the deploy workflow
 
 concurrency:
   group: sync-projects
@@ -51,16 +52,10 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      # A push made with the default GITHUB_TOKEN does NOT trigger other workflows or (reliably) a Git-integration deploy,
-      # so the rebuild is requested explicitly through a deploy hook stored as a repository secret.
+      # A push made with the default GITHUB_TOKEN does not start other workflows, but a manual-dispatch request does,
+      # so the site rebuild is requested explicitly.
       - name: Trigger rebuild
         if: steps.commit.outputs.changed == 'true'
         env:
-          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
-        run: |
-          if [ -z "$DEPLOY_HOOK_URL" ]; then
-            echo "::warning::DEPLOY_HOOK_URL secret is not set. Data was committed but the site was not rebuilt."
-          else
-            curl --fail --silent --show-error -X POST "$DEPLOY_HOOK_URL" > /dev/null
-            echo "Rebuild requested."
-          fi
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

@@ -1,5 +1,14 @@
 import type { NextConfig } from "next";
 
+/**
+ * Two deployment modes:
+ *  - default (Vercel / local): normal Next.js output with security and cache headers.
+ *  - GitHub Pages: set STATIC_EXPORT=1 (and BASE_PATH=/<repo> for a project site). Produces plain files in `out/`.
+ *    GitHub Pages cannot send custom HTTP headers, so those are skipped in this mode.
+ */
+const staticExport = process.env.STATIC_EXPORT === "1";
+const basePath = process.env.BASE_PATH ?? "";
+
 const security = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -10,15 +19,18 @@ const security = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  async headers() {
-    return [
-      { source: "/:path*", headers: security },
-      // Hashed build assets are already immutable. Public files are not hashed, so they revalidate daily
-      // and a replaced CV or image appears within a day even without a redeploy of the cache layer.
-      { source: "/images/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
-      { source: "/cv/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }] },
-    ];
-  },
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
+  ...(staticExport
+    ? { output: "export", trailingSlash: true, basePath, images: { unoptimized: true } }
+    : {
+        async headers() {
+          return [
+            { source: "/:path*", headers: security },
+            { source: "/images/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
+            { source: "/cv/:path*", headers: [{ key: "Cache-Control", value: "public, max-age=0, must-revalidate" }] },
+          ];
+        },
+      }),
 };
 
 export default nextConfig;

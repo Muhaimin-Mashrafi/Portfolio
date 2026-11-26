@@ -1,3 +1,4 @@
+import { asset } from "@/lib/base-path";
 import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { TagList } from "@/components/ui/Tag";
@@ -41,7 +42,7 @@ export function ProjectDetail({ project }: { project: ResolvedProject }) {
           <div className="grid gap-6 md:grid-cols-2">
             {d.screenshots.map((s) => (
               <figure key={s.src}>
-                <Image src={s.src} alt={s.alt} width={1200} height={750} className="h-auto w-full border border-line" loading="lazy" />
+                <Image src={asset(s.src)} alt={s.alt} width={1200} height={750} className="h-auto w-full border border-line" loading="lazy" />
                 {s.caption && <figcaption className="mt-2 font-mono text-xs text-muted">{s.caption}</figcaption>}
               </figure>
             ))}
