@@ -17,7 +17,8 @@ export const profile = {
   },
 
   /** Professional email. Leave null until supplied; the UI hides it while null. */
-  email: null as string | null,
+  email: "muhyminmn5@gmail.com" as string | null,
+  whatsapp: "8801879400304",
 
   /** Served from /public. The file may be missing; the UI handles that. */
   cv: {
