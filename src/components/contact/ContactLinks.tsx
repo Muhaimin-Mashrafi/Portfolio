@@ -18,6 +18,7 @@ export function ContactLinks() {
           <ExternalIcon className="size-4 text-muted" />
         </a>
       </li>
+      <li><a className={row} href={`https://wa.me/${profile.whatsapp}`} target="_blank" rel="noopener noreferrer"><span className="flex items-center gap-4"><span className="font-heading text-xl">WhatsApp</span></span><ExternalIcon className="size-4 text-muted" /></a></li>
       <li>
         {profile.email ? (
           <a className={row} href={`mailto:${profile.email}`}>
